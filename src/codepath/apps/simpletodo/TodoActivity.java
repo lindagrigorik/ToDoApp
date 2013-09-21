@@ -3,10 +3,13 @@ package codepath.apps.simpletodo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
@@ -22,11 +25,13 @@ public class TodoActivity extends Activity {
 	private ArrayAdapter<String> todoAdapter;
 	private ListView lvItems;
 	private EditText etNewItem;
+	private EditText etPriority;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+        etPriority = (EditText)findViewById(R.id.etPriority);
         etNewItem=(EditText)findViewById(R.id.etNewItem);
         lvItems=(ListView)findViewById(R.id.lvItems);
         readItems();
@@ -48,11 +53,28 @@ public class TodoActivity extends Activity {
 		});
 	}
 
-    public void onAddedItem(View v){
+	public void onAddedItem(View v){
     	String itemText = etNewItem.getText().toString();
-    	todoAdapter.add(itemText);
+    	if (!itemText.isEmpty()){
+    		int priority = todoItems.size();
+        	try{
+        		priority = Integer.parseInt(etPriority.getText().toString());
+        	} catch (Exception e){
+        		System.out.println(e);
+        	}
+        	if (priority > 0 && priority <= todoItems.size()){
+        		todoItems.add(priority-1, itemText);
+        	} else {
+        		todoItems.add(itemText);
+        	}
+        	todoAdapter.notifyDataSetChanged();
+        	etNewItem.setText("");
+        	etPriority.setText("");
+        	writeItems();
+    	}
     	etNewItem.setText("");
-    	writeItems();
+    	etPriority.setText("");
+    	
     }
     
     @Override

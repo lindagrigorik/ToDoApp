@@ -7,5 +7,7 @@
     <string name="add_hint">Add a new item</string>
     <string name="add_buttona_label">Add</string>
     <string name="add_button_label">Add</string>
+    <string name="add_priority"></string>
+    <string name="add_priority_item">Priority</string>
 
 </resources>

@@ -14,30 +14,36 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnAdd"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-    </ListView>
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onAddedItem"
+        android:layout_alignBaseline="@+id/etNewItem"
         android:layout_alignBottom="@+id/etNewItem"
         android:layout_alignRight="@+id/lvItems"
+        android:freezesText="true"
+        android:onClick="onAddedItem"
         android:text="@string/add_button_label" />
+
+    <EditText
+        android:id="@+id/etPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnAdd"
+        android:layout_alignLeft="@+id/lvItems"
+        android:ems="4"
+        android:hint="@string/add_priority_item" />
 
     <EditText
         android:id="@+id/etNewItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lvItems"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:hint="@string/add_hint" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_toRightOf="@+id/etPriority"
+        android:ems="7"
+        android:hint="@string/add_hint" />
 
 </RelativeLayout>
